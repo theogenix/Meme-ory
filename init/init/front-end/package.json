@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "@theomasakigenix/meme-ory",
+  "version": "1.0.0",
+  "description": "A memory game based on memes ¯\\(ツ)\\/¯.",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.master3.takima.io/tgenix/web-01"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.3"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
