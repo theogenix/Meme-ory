@@ -1,0 +1,169 @@
+/*****
+ * GLOBAL STYLE
+ */
+
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: #f5f5f5;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.navbar-brand img {
+  height: 50px;
+}
+
+body > main {
+  overflow: auto;
+}
+
+/* global style */
+.bg-primary {
+  background-color: #cb2468 !important;
+}
+
+.btn-outline-primary {
+  border-color: #cb2468;
+  color: #cb2468;
+}
+
+.btn-outline-primary:hover {
+  border-color: #cb2468;
+  background-color: #cb2468;
+  color: white;
+}
+
+.form-control:hover,
+.form-control:focus {
+  box-shadow: 0 0 0 0.25rem #cb246822;
+  border-color: #cb2468;
+}
+.bg-dark * {
+  color: #fcfcfc;
+}
+
+/*****
+ * Welcome Component
+ */
+
+/* welcome { ... } */
+.welcome-cmp .form-group.has-error .form-text.text-muted {
+  display: none;
+}
+
+.welcome-cmp .form-signin {
+  width: 100%;
+  max-width: 480px;
+  padding: 15px;
+  margin: auto;
+}
+
+/*****
+ * Game Component
+ */
+
+.game-cmp .cards {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(calc(12% - 1rem), 100px));
+  grid-auto-flow: row dense;
+  grid-row-gap: 1em;
+  grid-column-gap: 1em;
+}
+
+/*****
+ * Card Component
+ */
+
+/* card { ... } */
+.card-cmp {
+  position: relative;
+  display: inline-block !important;
+}
+
+.card-cmp .card-wrapper {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.5s;
+}
+
+.card-cmp .card-wrapper:hover {
+  cursor: pointer;
+}
+
+.card-cmp .card-wrapper:active {
+  transform: scale(0.97);
+  transition: transform 0.2s;
+}
+
+.card-cmp .card-wrapper .front-face,
+.card-cmp .card-wrapper .back-face {
+  width: 100%;
+  backface-visibility: hidden;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.card-cmp .card-wrapper .front-face {
+  transform: rotateY(180deg);
+}
+
+.card-cmp .card-wrapper .back-face {
+  position: absolute;
+  top: 0;
+}
+
+.card-cmp .card-wrapper.flip {
+  transform: rotateY(180deg);
+}
+
+/*****
+ * Score Component
+ */
+
+/* score { ... } */
+.score-cmp img.happy:hover {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.5s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-3deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(3deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(3deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-3deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-3deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-3deg);
+  }
+}
