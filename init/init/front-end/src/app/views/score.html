@@ -1,53 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>MÈME ory</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/src/app/styles/style.css" />
-    <!-- link to score controller -->
-    <script src="../scripts/utils.js"></script>
-    <script src="../scripts/score.js"></script>
-  </head>
-
-  <body>
-    <nav class="navbar bg-primary mb-3 shadow">
-      <div class="container-fluid">
-        <a class="navbar-brand d-flex" href="/src">
-          <img
-            class="d-inline-block align-top"
-            src="/src/assets/logo_take_my_money.png"
-            alt="logo"
-          />
-          <span class="align-self-center m-2">MÈME ory</span>
-        </a>
-        <span class="navbar-title"></span>
+<body>
+  <!-- TODO #shell: keep this element -->
+  <main class="score-cmp">
+    <div class="d-flex p-3">
+      <div class="flex-grow-1">
+        <h3 class="congrats">CONGRATS<br /><span id="name"></span></h3>
       </div>
-    </nav>
-
-    <section class="overflow-auto flex-grow-1 d-flex flex-column">
-      <div class="container-fluid flex-grow-1">
-        <!-- TODO #shell: keep this element -->
-        <main class="score-cmp">
-          <div class="d-flex p-3">
-            <div class="flex-grow-1">
-              <h3 class="congrats">CONGRATS<br /><span id="name"></span></h3>
-            </div>
-            <div>
-              <!-- TODO #component-images: change image location to './assets/happy_homer.jpg' -->
-              <img src="/src/assets/happy_homer.jpg" class="happy" />
-              <p class="size"><span id="size"></span> pairs</p>
-              <p class="time"><span id="time"></span>s</p>
-            </div>
-          </div>
-        </main>
+      <div>
+        <!-- TODO #component-images: change image location to './assets/happy_homer.jpg' -->
+        <img src="/src/assets/happy_homer.jpg" class="happy" />
+        <p class="size"><span id="size"></span> pairs</p>
+        <p class="time"><span id="time"></span>s</p>
       </div>
-      <footer class="p-3 bg-dark">
-        <span>&copy The MEME ory corporation | 2022</span>
-      </footer>
-    </section>
-    <script>
-      new ScoreComponent().init();
-    </script>
-  </body>
-</html>
+    </div>
+  </main>
+  <script>
+    new ScoreComponent().init();
+  </script>
+</body>

@@ -143,8 +143,7 @@ var CARD_TEMPLATE = ""
     setTimeout(
       // TODO #arrow-function: use arrow function instead.
       function () {
-        // TODO #spa: replace with './#score'
-        var scorePage = "./score.html";
+        var scorePage = "./#score";
         // TODO #template-literals:  use template literals (backquotes)
         window.location =
           scorePage +
