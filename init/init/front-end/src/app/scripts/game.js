@@ -8,8 +8,9 @@ var CARD_TEMPLATE = ""
   .concat("  </div>")
   .concat("</main>");
 
+import { parseUrl } from "./utils";
 // TODO #export-functions: remove the IIFE
-(function () {
+
   var environment = {
     api: {
       host: "http://localhost:8081",
@@ -20,7 +21,7 @@ var CARD_TEMPLATE = ""
   // TODO #class: use the ES6 class keyword
   // TODO #extends: extend Component
   /* class GameComponent constructor */
-  function GameComponent() {
+export function GameComponent() {
     // TODO #extends: call super(template)
     // gather parameters from URL
     var params = parseUrl();
@@ -279,4 +280,3 @@ var CARD_TEMPLATE = ""
       },
     },
   });
-})();
