@@ -1,5 +1,5 @@
 // TODO #import-html: use ES default imports to import game.html as template
-
+import template from "../views/game.html";
 var CARD_TEMPLATE = ""
   .concat('<main class="card-cmp">')
   .concat('  <div class="card-wrapper">')
@@ -21,12 +21,15 @@ import { parseUrl } from "./utils";
   // TODO #class: use the ES6 class keyword
   // TODO #extends: extend Component
   /* class GameComponent constructor */
+
 export function GameComponent() {
     // TODO #extends: call super(template)
     // gather parameters from URL
     var params = parseUrl();
 
     // TODO #import-html: assign template to this.template
+
+    this.template=template;
     // save player name & game ize
     this._name = params.name;
     this._size = parseInt(params.size) || 9;
