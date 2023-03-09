@@ -20,6 +20,11 @@ module.exports = {
     minimize: false,
   },
   module: {
-    rules: [],
+    rules: [
+      {
+        test: /\.(css)$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
   },
 };

@@ -5,7 +5,8 @@ import { GameComponent } from "./app/scripts/game";
 import { ScoreComponent } from "./app/scripts/score";
 import { WelcomeComponent } from "./app/scripts/welcome";
 // TODO #import-css: use ES side-effect imports to import styles/style.css
-
+import "bootstrap/dist/css/bootstrap.css";
+import "./app/styles/style.css";
 const outlet = document.querySelector("#content-outlet");
 const router = new Router(outlet);
 router
