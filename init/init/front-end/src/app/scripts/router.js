@@ -23,6 +23,7 @@
       this._components = {};
       this._templates = {};
       this._outlet = outlet;
+
       window.addEventListener("beforeunload", (event) =>
       this._onLocationChanged()
     );
@@ -37,7 +38,7 @@
    * @returns {Router}
    */
  register(hash, componentEntry) {
-    var path = `#${hash}`;
+    const path = `#${hash}`;
     if (!componentEntry) {
       throw new TypeError(
         `provided arg should be a Component. Got: ${componentEntry}`
@@ -55,7 +56,7 @@
     if (componentEntry.templateUrl) {
       if (!this._templates[componentEntry.templateUrl]) {
         this._templates[componentEntry.templateUrl] = true;
-        var _this = this;
+        const _this = this;
         _fetchTemplate(componentEntry.templateUrl, function (template) {
           componentEntry.template = template;
           if (_getRouteHash(window.location.href) === path) {
@@ -75,11 +76,11 @@
   };
 
   _renderComponent(componentEntry) {
-    var component = new componentEntry.component();
+    const component = new componentEntry.component();
 
-    var outlet = this._outlet;
+    const outlet = this._outlet;
 
-    var element = document.createElement("template");
+    const element = document.createElement("template");
     element.innerHTML =
       componentEntry.template ||
       component.template ||
@@ -96,8 +97,8 @@
       return;
     }
 
-    var path = _getRouteHash(loc);
-    var componentEntry = this._components[path];
+    const path = _getRouteHash(loc);
+    const componentEntry = this._components[path];
 
     if (componentEntry) {
       this._renderComponent(componentEntry);
@@ -113,7 +114,7 @@
   }
 
   function _fetchTemplate(templateUrl, cb) {
-    var xhr =
+    const xhr =
       typeof XMLHttpRequest != "undefined"
         ? new XMLHttpRequest()
         : new ActiveXObject("Microsoft.XMLHTTP");
@@ -121,8 +122,8 @@
     xhr.open("get", templateUrl, true);
 
     xhr.onreadystatechange = function () {
-      var status;
-      var data;
+      let status;
+      let data;
       // https://xhr.spec.whatwg.org/#dom-xmlhttprequest-readystate
       if (xhr.readyState == 4) {
         // `DONE`

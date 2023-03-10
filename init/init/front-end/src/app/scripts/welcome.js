@@ -23,19 +23,18 @@ init() {
 
   form.addEventListener(
     "submit",
-    // TODO #arrow-function: use arrow function instead.
-    function (event) {
+    (event) => {
       event.preventDefault();
       if (form.checkValidity() === false) {
         event.stopPropagation();
         form.classList.add("was-validated");
       } else {
-        var name = event.srcElement.querySelector("#nickname").value;
-        var size = parseInt(event.srcElement.querySelector("#size").value);
+        const name = event.srcElement.querySelector("#nickname").value;
+        const size = parseInt(event.srcElement.querySelector("#size").value);
 
         _startGame(name, size);
       }
-    }.bind(this),
+    },
     false
   );
 
