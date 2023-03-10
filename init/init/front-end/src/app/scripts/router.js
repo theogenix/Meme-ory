@@ -18,26 +18,25 @@
    * @param {HTMLElement} outlet The element to put components into.
    */
   // TODO #export-router: export this function
-  export function Router(outlet) {
-    this._components = {};
-    this._templates = {};
-    this._outlet = outlet;
-
-    window.addEventListener("beforeunload", (event) =>
+  export class Router{
+    constructor(outlet){
+      this._components = {};
+      this._templates = {};
+      this._outlet = outlet;
+      window.addEventListener("beforeunload", (event) =>
       this._onLocationChanged()
     );
     window.addEventListener("hashchange", (event) =>
       this._onLocationChanged(event.newURL)
     );
-  }
-
+    }
   /**
    * Bind a component ot be displayed when the registered URL is reached.
    * @param hash
    * @param componentEntry
    * @returns {Router}
    */
-  Router.prototype.register = function (hash, componentEntry) {
+ register(hash, componentEntry) {
     var path = `#${hash}`;
     if (!componentEntry) {
       throw new TypeError(
@@ -75,7 +74,7 @@
     return this;
   };
 
-  Router.prototype._renderComponent = function (componentEntry) {
+  _renderComponent(componentEntry) {
     var component = new componentEntry.component();
 
     var outlet = this._outlet;
@@ -92,7 +91,7 @@
     }
   };
 
-  Router.prototype._onLocationChanged = function (loc) {
+  _onLocationChanged(loc) {
     if (!loc) {
       return;
     }
@@ -108,7 +107,7 @@
       );
     }
   };
-
+  }
   function _getRouteHash(url) {
     return new URL(url).hash.split("?")[0] || "#";
   }
