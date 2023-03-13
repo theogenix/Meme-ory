@@ -52,31 +52,29 @@ export class GameComponent extends Component {
     // fetch the cards configuration from the server
     this.fetchConfig(
       // TODO #arrow-function: use arrow function instead.
-      (config)=> {
+      (config) => {
         this._config = config;
         this._boardElement = document.querySelector(".cards");
 
         // create cards out of the config
         this._cards = [];
         // TODO #functional-programming: use Array.map() instead.
-        for (let i in this._config.ids) {
-          this._cards[i] = new CardComponent(this._config.ids[i]);
-        }
+        this._cards = this._config.ids.map(element => new CardComponent(element));
 
         // TODO #functional-programming: use Array.forEach() instead.
         // TODO #let-const: replace var with let.
-        for (let i in this._cards) {
-          let card = this._cards[i];
+
+        this._cards.forEach(card => {
           this._boardElement.appendChild(card.getElement());
 
           card.getElement().addEventListener(
             "click",
-            function () {
+            () => {
               this._flipCard(card);
-            }.bind(this)
+            }
           );
-        }
 
+        });
         this.start();
       }
     );
@@ -90,7 +88,7 @@ export class GameComponent extends Component {
     card.getElement().addEventListener(
       "click",
       // TODO #arrow-function: use arrow function instead.
-      ()=> {
+      () => {
         this._flipCard(card);
       }
     );
@@ -107,10 +105,10 @@ export class GameComponent extends Component {
 
     this._timer = setInterval(
       // TODO #arrow-function: use arrow function instead.
-      ()=> {
+      () => {
         // TODO #template-literals:  use template literals (backquotes)
         document.querySelector("nav .navbar-title").textContent =
-        `Player: ${this._name}.Elapsed time: ${seconds++}`;
+          `Player: ${this._name}.Elapsed time: ${seconds++}`;
       },
       1000
     );
@@ -126,10 +124,10 @@ export class GameComponent extends Component {
 
     // TODO #template-literals:  use template literals (backquotes)
 
-    xhr.open("get",`${environment.api.host}/board?size=${this._size}`, true);
+    xhr.open("get", `${environment.api.host}/board?size=${this._size}`, true);
 
     // TODO #arrow-function: use arrow function instead.
-    xhr.onreadystatechange = ()=> {
+    xhr.onreadystatechange = () => {
       let status;
       let data;
       // https://xhr.spec.whatwg.org/#dom-xmlhttprequest-readystate
@@ -157,10 +155,10 @@ export class GameComponent extends Component {
 
     setTimeout(
       // TODO #arrow-function: use arrow function instead.
-      ()=> {
+      () => {
         let scorePage = "./#score";
         // TODO #template-literals:  use template literals (backquotes)
-        window.location=`${scorePage}?name=${this._name}&size=${this._size}&time=${timeElapsedInSeconds}`
+        window.location = `${scorePage}?name=${this._name}&size=${this._size}&time=${timeElapsedInSeconds}`
       },
       750
     );
@@ -206,7 +204,7 @@ export class GameComponent extends Component {
         // wait a short amount of time before hiding both cards
         setTimeout(
           // TODO #arrow-function: use arrow function instead.
-          ()=> {
+          () => {
             // hide the cards
             this._flippedCard.flip();
             card.flip();
