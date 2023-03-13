@@ -48,9 +48,9 @@ export class GameComponent extends Component {
 
   // TODO #class: turn function into a method of GameComponent
   /* method GameComponent.init */
-  init() {
+  async init() {
     // fetch the cards configuration from the server
-    this.fetchConfig(
+    this._config=await this.fetchConfig(
       // TODO #arrow-function: use arrow function instead.
       (config) => {
         this._config = config;
@@ -116,7 +116,7 @@ export class GameComponent extends Component {
 
   // TODO #class: turn function into a method of GameComponent
   /* method GameComponent.fetchConfig */
-  fetchConfig(cb) {
+  async fetchConfig(cb) {
     let xhr =
       typeof XMLHttpRequest != "undefined"
         ? new XMLHttpRequest()
