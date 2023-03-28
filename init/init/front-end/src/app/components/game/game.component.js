@@ -1,7 +1,7 @@
 // TODO #import-html: use ES default imports to import game.html as template
 import template from "./game.component.html";
 import { Component } from "/web-01/web-01/init/init/front-end/src/app/scripts/component";
-import "./game.component.css";
+import "./game.component.scss";
 import { CardComponent } from "./card/card.component";
 import { parseUrl } from "/web-01/web-01/init/init/front-end/src/app/scripts/utils";
 // TODO #export-functions: remove the IIFE

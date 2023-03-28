@@ -6,7 +6,7 @@ import template from "/web-01/web-01/init/init/front-end/src/app/components/welc
 // TODO #class: use the ES6 class keyword
 /* class WelcomeComponent constructor  */
 import { Component } from "/web-01/web-01/init/init/front-end/src/app/scripts/component";
-import "./welcome.component.css";
+import "./welcome.component.scss";
 export class WelcomeComponent extends Component {
   constructor(){
     super(template)

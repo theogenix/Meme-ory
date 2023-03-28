@@ -13,7 +13,7 @@ import card8 from "/src/assets/cards/card-8.png";
 import card9 from "/src/assets/cards/card-9.png";
 
 import CARD_TEMPLATE from "./card.component.html";
-import "./card.component.css";
+import "./card.component.scss";
 import { Component } from "/web-01/web-01/init/init/front-end/src/app/scripts/component";
 
 let CARDS_IMAGE = [

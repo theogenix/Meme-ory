@@ -6,7 +6,7 @@ import template from "/web-01/web-01/init/init/front-end/src/app/components/scor
 /* class ScoreComponent constructor */
 import { parseUrl } from "/web-01/web-01/init/init/front-end/src/app/scripts/utils";
 import { Component } from "/web-01/web-01/init/init/front-end/src/app/scripts/component";
-import "./score.component.css";
+import "./score.component.scss";
 export class ScoreComponent extends Component {
   constructor() {
     // TODO #extends: call super(template)

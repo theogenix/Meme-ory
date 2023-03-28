@@ -1,4 +1,4 @@
-import "./footer.component.css";
+import "./footer.component.scss";
 import template from "./footer.component.html";
 
 

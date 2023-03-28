@@ -1,0 +1,8 @@
+.game-cmp .cards {
+    display: grid;
+  
+    grid-template-columns: repeat(auto-fill, minmax(calc(12% - 1rem), 100px));
+    grid-auto-flow: row dense;
+    grid-row-gap: 1em;
+    grid-column-gap: 1em;
+  }

@@ -1,4 +1,4 @@
-import "./navbar.component.css";
+import "./navbar.component.scss";
 import template from "./navbar.component.html";
 
 
