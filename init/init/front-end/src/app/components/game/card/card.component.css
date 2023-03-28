@@ -1,0 +1,40 @@
+
+.card-cmp {
+    position: relative;
+    display: inline-block !important;
+  }
+  
+  .card-cmp .card-wrapper {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.5s;
+  }
+  
+  .card-cmp .card-wrapper:hover {
+    cursor: pointer;
+  }
+  
+  .card-cmp .card-wrapper:active {
+    transform: scale(0.97);
+    transition: transform 0.2s;
+  }
+  
+  .card-cmp .card-wrapper .front-face,
+  .card-cmp .card-wrapper .back-face {
+    width: 100%;
+    backface-visibility: hidden;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card-cmp .card-wrapper .front-face {
+    transform: rotateY(180deg);
+  }
+  
+  .card-cmp .card-wrapper .back-face {
+    position: absolute;
+    top: 0;
+  }
+  
+  .card-cmp .card-wrapper.flip {
+    transform: rotateY(180deg);
+  }

@@ -1,0 +1,10 @@
+.welcome-cmp .form-group.has-error .form-text.text-muted {
+    display: none;
+  }
+  
+  .welcome-cmp .form-signin {
+    width: 100%;
+    max-width: 480px;
+    padding: 15px;
+    margin: auto;
+  }

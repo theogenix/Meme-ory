@@ -1,11 +1,12 @@
 // TODO #import-html: use ES default imports to import game.html as template
-import template from "../views/score.html";
+import template from "/web-01/web-01/init/init/front-end/src/app/components/score/score.component.html";
 // TODO #export-functions: remove the IIFE
 // TODO #export-functions: export function ScoreComponent
 // TODO #class: use the ES6 class keyword
 /* class ScoreComponent constructor */
-import { parseUrl } from "./utils";
-import { Component } from "./component";
+import { parseUrl } from "/web-01/web-01/init/init/front-end/src/app/scripts/utils";
+import { Component } from "/web-01/web-01/init/init/front-end/src/app/scripts/component";
+import "./score.component.css";
 export class ScoreComponent extends Component {
   constructor() {
     // TODO #extends: call super(template)
