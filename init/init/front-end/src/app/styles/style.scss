@@ -1,10 +1,10 @@
 /*****
  * GLOBAL STYLE
  */
+ @import "./colors";
+ @import "../../../node_modules/bootstrap/scss/bootstrap";
 
-@import "./_colors";
-
-body {
+ body {
   display: flex;
   flex-flow: column nowrap;
   background-color: #f5f5f5;
@@ -14,26 +14,20 @@ body {
   overflow: hidden;
 }
 
+.navbar-brand img {
+  height: 50px;
+}
+
 body > main {
   overflow: auto;
 }
 
 /* global style */
 .bg-primary {
-  background-color: $primary !important;
 }
 .btn-primary {
-  background-color: $primary !important;
-    .btn-outline-primary {
-      border-color: $primary;
-      color: $primary;
 }
-}
-
-.btn-outline-primary:hover {
-  border-color: $primary;
-  background-color: $primary;
-  color: white;
+.btn-outline-primary {
 }
 
 .form-control:hover,
@@ -42,29 +36,5 @@ body > main {
   border-color: $primary;
 }
 .bg-dark * {
-  color: $primary;
+  color: #fcfcfc;
 }
-
-/*****
- * Welcome Component
- */
-
-/* welcome { ... } */
-
-
-/*****
- * Game Component
- */
-
-
-
-/*****
- * Card Component
- */
-
-/* card { ... } */
-/*****
- * Score Component
- */
-
-/* score { ... } */
