@@ -1,43 +1,38 @@
-// TODO #export-router: remove this IIFE
-  /**
-   * Append an html template to the document, at the given outlet.
-   * @param HTMLElement outlet the location on the document to add the template
-   * @param HTMLElement template the template to append
-   */
-  function renderTemplate(outlet, template) {
-    while (outlet.lastChild) {
-      outlet.removeChild(outlet.lastChild);
-    }
-    outlet.appendChild(template);
-    // TODO #spa: use the DOM api to remove all childNodes of the outlet element
-    // TODO #spa: use the DOM api to append the 'template' element as a child of the 'outlet' element
+/**
+ * Append an html template to the document, at the given outlet.
+ * @param HTMLElement outlet the location on the document to add the template
+ * @param HTMLElement template the template to append
+ */
+function renderTemplate(outlet, template) {
+  while (outlet.lastChild) {
+    outlet.removeChild(outlet.lastChild);
   }
+  outlet.appendChild(template);
+}
 
-  /**
-   * Create a new router. This router will load components into the given outlet.
-   * @param {HTMLElement} outlet The element to put components into.
-   */
-  // TODO #export-router: export this function
-  export class Router{
-    constructor(outlet){
-      this._components = {};
-      this._templates = {};
-      this._outlet = outlet;
-
-      window.addEventListener("beforeunload", (event) =>
+/**
+ * Create a new router. This router will load components into the given outlet.
+ * @param {HTMLElement} outlet The element to put components into.
+ */
+export class Router {
+  constructor(outlet) {
+    this._components = {};
+    this._templates = {};
+    this._outlet = outlet;
+    window.addEventListener("beforeunload", (event) =>
       this._onLocationChanged()
     );
     window.addEventListener("hashchange", (event) =>
       this._onLocationChanged(event.newURL)
     );
-    }
+  }
   /**
    * Bind a component ot be displayed when the registered URL is reached.
    * @param hash
    * @param componentEntry
    * @returns {Router}
    */
- register(hash, componentEntry) {
+  register(hash, componentEntry) {
     const path = `#${hash}`;
     if (!componentEntry) {
       throw new TypeError(
@@ -108,33 +103,32 @@
       );
     }
   };
-  }
-  function _getRouteHash(url) {
-    return new URL(url).hash.split("?")[0] || "#";
-  }
+}
+function _getRouteHash(url) {
+  return new URL(url).hash.split("?")[0] || "#";
+}
 
-  function _fetchTemplate(templateUrl, cb) {
-    const xhr =
-      typeof XMLHttpRequest != "undefined"
-        ? new XMLHttpRequest()
-        : new ActiveXObject("Microsoft.XMLHTTP");
+function _fetchTemplate(templateUrl, cb) {
+  const xhr =
+    typeof XMLHttpRequest != "undefined"
+      ? new XMLHttpRequest()
+      : new ActiveXObject("Microsoft.XMLHTTP");
 
-    xhr.open("get", templateUrl, true);
+  xhr.open("get", templateUrl, true);
 
-    xhr.onreadystatechange = function () {
-      let status;
-      let data;
-      // https://xhr.spec.whatwg.org/#dom-xmlhttprequest-readystate
-      if (xhr.readyState == 4) {
-        // `DONE`
-        status = xhr.status;
-        if (status == 200) {
-          data = xhr.responseText;
-          cb(data);
-        } else {
-          throw new Error(status);
-        }
+  xhr.onreadystatechange = function () {
+    let status;
+    let data;
+    if (xhr.readyState == 4) {
+      // `DONE`
+      status = xhr.status;
+      if (status == 200) {
+        data = xhr.responseText;
+        cb(data);
+      } else {
+        throw new Error(status);
       }
-    };
-    xhr.send();
+    }
   };
+  xhr.send();
+};

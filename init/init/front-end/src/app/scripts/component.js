@@ -1,5 +1,5 @@
 export class Component {
-    constructor(template = "") {
-      this.template = template;
-    }
+  constructor(template = "") {
+    this.template = template;
   }
+}

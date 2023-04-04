@@ -1,63 +1,94 @@
 # web-01
 
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.master3.takima.io/tgenix/web-01.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.master3.takima.io/tgenix/web-01/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
 ## Name
-Choose a self-explaining name for your project.
+Web-01
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+1. `npm install` command also generated a package-lock.json file along with package.json. What is the purpose of this file?
 
-## Badges
+This file ensure that on each machine that will run the project, a same packages'versions and their dependencies are installed. This is useful when working with others developpers or  deploying the project to different environments.
+
+2. By convention, all NPM dependencies use a 3-digit format for
+version numbers. How do you call this?
+
+It is called semantic versioning. It's indicates the level of changes made in each version of a package. It's helps developers to manage their dependencies in the projects and avoid compatibility issues.
+
+3. What is a devDependency exactly? What are the differences with a
+dependency?
+
+It's a package that are required to build, test and deploy the application. it's only used during the developement and not during the production use, whereas the dependency is useful during the whole app's production.  
+
+4. What is a closure/iife ? What was it used for ? What replaced it?
+
+A closure is a function in JavaScript that preserves the outer scope in its inner scope. Is it used to access variables that are in the function's outer lexical scope, even after the outer function has returned. With this feature, developpers can create functions with persistent state and private variables. 
+An IIFE (Immediately Invoked Function Expression) is a JavaScript function that is defined and immediately invoked. It is commonly used to create a private scope and prevent naming collisions.
+Closures and IIFE have been replaced by modules that provides a standardized way of encapsulating functionality and creating private scopes.
+
+5. What is the difference between import * from './utils' and import
+{ parseUrl } from './utils'? What can be the consequences of
+using one instead of the other?
+
+import * imports everything form the utils module into a single object, whereas import {parseURL} will import only the parseURL function from the utils module.
+The second import is more precise, and allows to avoid naming collisions. In addition to that, using import * can lead to some confusions for the origin of each property and it's purposes because it's all bundled into a single object.
+
+6. Can you think of at least 2 things that are possible with Java
+classes, but cannot be done with ES6 classes?
+With Java classes, you can specify the access of each class (private,public,protected) to control the properties and methods within the class. And you can overload methods by establishing different parameter lists.
+
+7. What are the differences between var and let;
+
+"var" allows you to declare a variable in the global scope, while "let" and "const" only live in the scopes in which they are declared. "const" allows you to declare a constant whose value cannot be modified.
+
+8. What is the .bind(this) stuff? What happens if you delete it? Is
+it needed when using an arrow function ? why ?
+It's to ensure that a function is called with the correct value for the keyword this. Whenever you delete it, the value of keyword this can be a value you didn't expected.
+It isn't needed when using an arrow function because for an arrow function, the this value within the function is the same as the one outside the arrow function.
+
+9. What does the @ symbol mean in @babel/***?
+the @ symbol is used to denote a scoped package name in the context of package managers.
+
+10. What are the advantages of Promises?
+
+It allows to clarify the code, and to wait for the result of the asynchronous function before executing the next function. There is a .then() method to store the returned value and since .then() returns a promise, we can combine promises."
+
+11. What version of ECMAScript async / await was released in ?
+
+It was released in the 2017 version.
+
+12. Component-oriented programming for the web is considered more
+maintainable. Why?
+
+It is considered more maintainable because of components reusability, easier control and management of the application, components' encapsulation, easier testing of each components and separation of concerns. With this maintanability, the developer productivity and the web application robustness improve. 
+
+13. What is Functional programming?
+
+It's a way of writing computer programs that focuses on using functions to perform operations on data, instead of relying on changing values in variables.
+It leads to a more robust and maintainable code, because programs are more predictable and easier to reason about.
+
+14. Explain what the map() function does ?
+
+map is a function that takes a callback function as argument and returns a new array that contains the results of calling the callback function on each element.
+
+15. Explain what the filter() function does ?
+
+It allow to filter an array. For example, if we have an array [0, 4, 6, 7] and we want a new array with values higher than 5, we could use array.filter(element => element > 5);
+
+16. Explain what the reduce() function does ?
+
+It allow to reduce the an iterable to a single value by applying a function to each element of the iterable.
+
+17. What is the difference between .then() and async/await when
+handling asynchronous functions?
+
+The differences are the syntax, the error handling and the control flow. async/await is considered to be more readable an easier to reason.
+
+18. What does the _ prefix mean on a sass file?
+
+It is used to indicate that a file is a partial file. It's a file that can be imported into other sass file with the @import keyword.
+
+
+
+## Badges 
 On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
 ## Visuals
