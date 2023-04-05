@@ -35,7 +35,7 @@ export class GameComponent extends Component {
         this._cards = [];
 
         let savedCards = JSON.parse(localStorage.getItem('cards')) || [];
-        let savedFlippedCard = parseInt(localStorage.getItem("flippedCard")) || null;
+        let savedFlippedCard = localStorage.getItem("flippedCard") != null ? parseInt(localStorage.getItem("flippedCard")) : null;
         this._matchedPairs = parseInt(localStorage.getItem("matchedPairs")) || 0;
 
         if (savedCards && savedCards.length === this._config.ids.length) {
@@ -122,8 +122,6 @@ export class GameComponent extends Component {
       () => {
         let scorePage = "./#score";
         window.location = `${scorePage}?name=${this._name}&size=${this._size}&time=${localStorage.getItem("time")}`
-        //localStorage.removeItem("time");
-        //localStorage.removeItem("cards");
         localStorage.clear();
       },
       750
@@ -139,8 +137,8 @@ export class GameComponent extends Component {
     // flip the card
     card.flip();
     // if flipped first card of the pair
-    if (!this._flippedCard) {
-      // keep this card flipped, and wait for the second card of the pair
+    if(this._flippedCard === null || this._flippedCard === undefined || this._flippedCard === NaN || this._flippedCard === "" || this._flippedCard === false) {
+      // keep this card flipped, and wait for the second card of the pair si égale à nulle ou vide.
       this._flippedCard = card;
       this._flippedCardIndex = this._cards.indexOf(card);
     } else {
@@ -170,7 +168,8 @@ export class GameComponent extends Component {
           this._flippedCardIndex = null;
           localStorage.setItem("cards", JSON.stringify(this._cards));
           localStorage.setItem("matchedPairs", this._matchedPairs);
-          if (this._flippedCardIndex) {
+          if (this._flippedCardIndex !=null){
+            //si pas égale à nulle
             localStorage.setItem("flippedCard", this._flippedCardIndex);
           } else {
             localStorage.removeItem("flippedCard");
@@ -180,7 +179,7 @@ export class GameComponent extends Component {
     }
     localStorage.setItem("cards", JSON.stringify(this._cards));
     localStorage.setItem("matchedPairs", this._matchedPairs);
-    if (this._flippedCardIndex) {
+    if (this._flippedCardIndex !=null) {
       localStorage.setItem("flippedCard", this._flippedCardIndex);
     } else {
       localStorage.removeItem("flippedCard");
