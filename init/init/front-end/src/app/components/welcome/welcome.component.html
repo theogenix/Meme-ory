@@ -5,10 +5,19 @@
         <div class="card-body">
           <div class="form-label-group mb-3">
             <label for="nickname">Nickname</label>
-            <input id="nickname" autofocus class="form-control" type="text" name="name" required
-              placeholder="Enter a nickname" pattern="[A-Za-z0-9]{3,20}" aria-describedby="nicknameHelp" />
-            <small id="nicknameHelp" class="form-text text-muted">Any nickname with characters 3 to 20 alphanumeric
-              charachers
+            <input
+              id="nickname"
+              autofocus
+              class="form-control"
+              type="text"
+              name="name"
+              required
+              placeholder="Enter a nickname"
+              pattern="[A-Za-z0-9]{3,20}"
+              aria-describedby="nicknameHelp"
+            />
+            <small id="nicknameHelp" class="form-text text-muted"
+              >Any nickname with characters 3 to 20 alphanumeric charachers
             </small>
             <div class="invalid-feedback">
               <p>
@@ -19,9 +28,19 @@
           </div>
           <div class="form-group mb-3">
             <label for="size">Size</label>
-            <input id="size" class="form-control" required type="number" min="1" max="10" name="size"
-              placeholder="enter a size" aria-describedby="sizeHelp" />
-            <small id="sizeHelp" class="form-text text-muted">how many pairs do you want to play with?
+            <input
+              id="size"
+              class="form-control"
+              required
+              type="number"
+              min="1"
+              max="10"
+              name="size"
+              placeholder="enter a size"
+              aria-describedby="sizeHelp"
+            />
+            <small id="sizeHelp" class="form-text text-muted"
+              >how many pairs do you want to play with?
             </small>
             <div class="invalid-feedback">
               <p>Game size must be between 1 and 10.</p>
@@ -35,7 +54,6 @@
     </div>
   </main>
   <script>
-    // execute the controller
     var wc = new WelcomeComponent().init();
   </script>
 </body>

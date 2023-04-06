@@ -1,8 +1,3 @@
-/**
- * Append an html template to the document, at the given outlet.
- * @param HTMLElement outlet the location on the document to add the template
- * @param HTMLElement template the template to append
- */
 function renderTemplate(outlet, template) {
   while (outlet.lastChild) {
     outlet.removeChild(outlet.lastChild);
@@ -10,10 +5,6 @@ function renderTemplate(outlet, template) {
   outlet.appendChild(template);
 }
 
-/**
- * Create a new router. This router will load components into the given outlet.
- * @param {HTMLElement} outlet The element to put components into.
- */
 export class Router {
   constructor(outlet) {
     this._components = {};
@@ -26,12 +17,6 @@ export class Router {
       this._onLocationChanged(event.newURL)
     );
   }
-  /**
-   * Bind a component ot be displayed when the registered URL is reached.
-   * @param hash
-   * @param componentEntry
-   * @returns {Router}
-   */
   register(hash, componentEntry) {
     const path = `#${hash}`;
     if (!componentEntry) {
@@ -39,7 +24,6 @@ export class Router {
         `provided arg should be a Component. Got: ${componentEntry}`
       );
     }
-
     if (typeof hash !== "string") {
       throw new TypeError(
         `provided route url should be a string. Got: ${hash}`
@@ -47,7 +31,6 @@ export class Router {
     } else {
       this._components[path] = componentEntry;
     }
-
     if (componentEntry.templateUrl) {
       if (!this._templates[componentEntry.templateUrl]) {
         this._templates[componentEntry.templateUrl] = true;
@@ -68,13 +51,10 @@ export class Router {
     }
 
     return this;
-  };
-
+  }
   _renderComponent(componentEntry) {
     const component = new componentEntry.component();
-
     const outlet = this._outlet;
-
     const element = document.createElement("template");
     element.innerHTML =
       componentEntry.template ||
@@ -85,7 +65,7 @@ export class Router {
     if (typeof component.init === "function") {
       component.init();
     }
-  };
+  }
 
   _onLocationChanged(loc) {
     if (!loc) {
@@ -102,7 +82,7 @@ export class Router {
         `navigated to "${loc}, but no component was registered at this address"`
       );
     }
-  };
+  }
 }
 function _getRouteHash(url) {
   return new URL(url).hash.split("?")[0] || "#";
@@ -131,4 +111,4 @@ function _fetchTemplate(templateUrl, cb) {
     }
   };
   xhr.send();
-};
+}

@@ -12,7 +12,7 @@ import card9 from "/src/assets/cards/card-9.png";
 
 import CARD_TEMPLATE from "./card.component.html";
 import "./card.component.scss";
-import { Component } from "/web-01/web-01/init/init/front-end/src/app/scripts/component";
+import { Component } from "../../../scripts/component";
 
 let CARDS_IMAGE = [
   back,
@@ -29,19 +29,14 @@ let CARDS_IMAGE = [
 ];
 export class CardComponent extends Component {
   constructor(id, obj = null) {
-    super("card", CARD_TEMPLATE)
-    // is this card flipped ?
+    super("card", CARD_TEMPLATE);
     this._flipped = false;
     this.template = CARD_TEMPLATE;
-
-    // has the matching card has been discovered already ?
     this.matched = false;
-
     this._elt = document.createElement("div");
     this._elt.innerHTML = this.template;
     this._elt = this._elt.firstElementChild;
     this._id = id;
-
     this._imageElt = this.getElement().querySelector(".card-wrapper");
     this._imageElt.querySelector("img.front-face").src =
       CARDS_IMAGE[this._id + 1];
@@ -58,17 +53,16 @@ export class CardComponent extends Component {
 
   getElement() {
     return this._elt;
-  };
+  }
 
   flip() {
     this._imageElt.classList.toggle("flip");
     this._flipped = !this._flipped;
-  };
+  }
 
   equals(card) {
     return card._id === this._id;
-  };
-
+  }
 
   get flipped() {
     return this._flipped;

@@ -1,12 +1,9 @@
-// TODO #import-html: use ES default imports to import game.html as template
-import template from "/web-01/web-01/init/init/front-end/src/app/components/score/score.component.html";
-// TODO #export-functions: remove the IIFE
-// TODO #export-functions: export function ScoreComponent
-// TODO #class: use the ES6 class keyword
-/* class ScoreComponent constructor */
-import { parseUrl } from "/web-01/web-01/init/init/front-end/src/app/scripts/utils";
-import { Component } from "/web-01/web-01/init/init/front-end/src/app/scripts/component";
+import template from "./score.component.html";
+import { parseUrl } from "../../scripts/utils";
+import { Component } from "../../scripts/component";
 import "./score.component.scss";
+import { getScores } from "./getScores";
+
 export class ScoreComponent extends Component {
   constructor() {
     const params = parseUrl();
@@ -19,5 +16,37 @@ export class ScoreComponent extends Component {
     document.getElementById("name").innerText = this.name;
     document.getElementById("size").innerText = this.size;
     document.getElementById("time").innerText = this.time;
-  };
+    getScores()
+      .then((scores) => {
+        const scoresArray = scores.map((score, index) => ({
+          ...score,
+          index: index + 1,
+        }));
+        scoresArray.sort((a, b) => a.time - b.time);
+        const tbody = document.querySelector("#high-scores-table tbody");
+        tbody.innerHTML = "";
+        scoresArray.forEach((score, index) => {
+          const row = document.createElement("tr");
+          const rankCell = document.createElement("td");
+          const nameCell = document.createElement("td");
+          const timeCell = document.createElement("td");
+          const sizeCell = document.createElement("td");
+
+          rankCell.textContent = index + 1;
+          nameCell.textContent = score.name;
+          timeCell.textContent = score.time;
+          sizeCell.textContent = score.size;
+
+          row.appendChild(rankCell);
+          row.appendChild(nameCell);
+          row.appendChild(timeCell);
+          row.appendChild(sizeCell);
+
+          tbody.appendChild(row);
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 }

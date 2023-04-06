@@ -9,6 +9,9 @@ module.exports = {
       directory: path.join(__dirname),
     },
   },
+  experiments: {
+    topLevelAwait: true,
+  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
@@ -30,7 +33,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/i,
-        type: 'asset/resource'
+        type: "asset/resource",
       },
       {
         test: /\.m?js$/,
@@ -45,8 +48,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: ["style-loader", "css-loader", "sass-loader"],
-      }
-
+      },
     ],
   },
 };

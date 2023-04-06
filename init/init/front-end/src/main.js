@@ -22,5 +22,3 @@ router
   .register("score", {
     component: ScoreComponent,
   });
-
-

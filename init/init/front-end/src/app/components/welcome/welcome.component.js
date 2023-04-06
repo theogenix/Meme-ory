@@ -1,9 +1,10 @@
-import template from "/web-01/web-01/init/init/front-end/src/app/components/welcome/welcome.component.html"
-import { Component } from "/web-01/web-01/init/init/front-end/src/app/scripts/component";
+import template from "./welcome.component.html";
+import { Component } from "../../scripts/component";
 import "./welcome.component.scss";
+
 export class WelcomeComponent extends Component {
   constructor() {
-    super(template)
+    super(template);
   }
   init() {
     const form = document.querySelector("form.form-signin");
@@ -24,5 +25,5 @@ export class WelcomeComponent extends Component {
       false
     );
     return this;
-  };
+  }
 }

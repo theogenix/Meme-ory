@@ -1,3 +1,4 @@
 init/init/front-end/dist
 init/init/node_modules
-
+init/init/front-end/node_modules
+init/init/back-end/node_modules

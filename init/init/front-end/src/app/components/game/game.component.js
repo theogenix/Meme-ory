@@ -1,22 +1,20 @@
 import template from "./game.component.html";
-import { Component } from "/web-01/web-01/init/init/front-end/src/app/scripts/component";
+import { Component } from "../../scripts/component";
 import "./game.component.scss";
 import { CardComponent } from "./card/card.component";
-import { parseUrl } from "/web-01/web-01/init/init/front-end/src/app/scripts/utils";
+import { parseUrl } from "../../scripts/utils";
 
 let environment = {
   api: {
     host: "http://localhost:8081",
   },
 };
-export class GameComponent extends Component {
 
+export class GameComponent extends Component {
   constructor() {
-    super(template)
-    // gather parameters from URL
+    super(template);
     let params = parseUrl();
     this.template = template;
-    // save player name & game size
     this._name = params.name;
     this._size = parseInt(params.size) || 9;
     this._flippedCard = null;
@@ -25,70 +23,63 @@ export class GameComponent extends Component {
   }
 
   async init() {
-    // fetch the cards configuration from the server
-    this._config = await this.fetchConfig(
-      (config) => {
-        this._config = config;
-        this._boardElement = document.querySelector(".cards");
+    this._config = await this.fetchConfig((config) => {
+      this._config = config;
+      this._boardElement = document.querySelector(".cards");
+      this._cards = [];
 
-        // create cards out of the config
-        this._cards = [];
+      let savedCards = JSON.parse(localStorage.getItem("cards")) || [];
+      let savedFlippedCard =
+        localStorage.getItem("flippedCard") != null
+          ? parseInt(localStorage.getItem("flippedCard"))
+          : null;
+      this._matchedPairs = parseInt(localStorage.getItem("matchedPairs")) || 0;
 
-        let savedCards = JSON.parse(localStorage.getItem('cards')) || [];
-        let savedFlippedCard = localStorage.getItem("flippedCard") != null ? parseInt(localStorage.getItem("flippedCard")) : null;
-        this._matchedPairs = parseInt(localStorage.getItem("matchedPairs")) || 0;
-
-        if (savedCards && savedCards.length === this._config.ids.length) {
-          console.log(savedCards)
-          this._cards = savedCards.map((card, index) => {
-            return new CardComponent(card._id, card);
-          });
-        } else {
-          this._cards = this._config.ids.map(element => new CardComponent(element));
-        }
-
-        this._flippedCard = this._cards[savedFlippedCard];
-
-        this._cards.forEach(card => {
-          this._boardElement.appendChild(card.getElement());
-          card.getElement().addEventListener(
-            "click",
-            () => {
-              this._flipCard(card);
-            }
-          );
+      if (savedCards && savedCards.length === this._config.ids.length) {
+        this._cards = savedCards.map((card, index) => {
+          return new CardComponent(card._id, card);
         });
-        this.start();
+      } else {
+        this._cards = this._config.ids.map(
+          (element) => new CardComponent(element)
+        );
       }
-    );
-  };
+
+      this._flippedCard = this._cards[savedFlippedCard];
+
+      this._cards.forEach((card) => {
+        this._boardElement.appendChild(card.getElement());
+        card.getElement().addEventListener("click", () => {
+          this._flipCard(card);
+        });
+      });
+      this.start();
+    });
+  }
 
   _appendCard(card) {
     this._boardElement.appendChild(card.getElement());
-    card.getElement().addEventListener(
-      "click",
-      () => {
-        this._flipCard(card);
-      }
-
-    );
-  };
+    card.getElement().addEventListener("click", () => {
+      this._flipCard(card);
+    });
+  }
 
   start() {
     this._startTime = Date.now();
     let seconds = parseInt(localStorage.getItem("time")) || 0;
-    document.querySelector("nav .navbar-title").textContent =
-      `Player: ${this._name}.Elapsed time: ${seconds++}`;
+    document.querySelector("nav .navbar-title").textContent = `Player: ${
+      this._name
+    }.Elapsed time: ${seconds++}`;
 
-    this._timer = setInterval(
-      () => {
-        localStorage.setItem("time", seconds++);
-        document.querySelector("nav .navbar-title").textContent =
-          `Player: ${this._name}.Elapsed time: ${localStorage.getItem("time")}`;
-      },
-      1000
-    );
-  };
+    this._timer = setInterval(() => {
+      localStorage.setItem("time", seconds++);
+      localStorage.setItem("name", this._name);
+      localStorage.setItem("size", this._size);
+      document.querySelector("nav .navbar-title").textContent = `Player: ${
+        this._name
+      }.Elapsed time: ${localStorage.getItem("time")}`;
+    }, 1000);
+  }
 
   async fetchConfig(cb) {
     let xhr =
@@ -111,22 +102,41 @@ export class GameComponent extends Component {
       }
     };
     xhr.send();
-  };
+  }
   gotoScore() {
     let timeElapsedInSeconds = Math.floor(
       (Date.now() - this._startTime) / 1000
     );
     clearInterval(this._timer);
 
-    setTimeout(
-      () => {
-        let scorePage = "./#score";
-        window.location = `${scorePage}?name=${this._name}&size=${this._size}&time=${localStorage.getItem("time")}`
-        localStorage.clear();
+    setTimeout(() => {
+      let scorePage = "./#score";
+      window.location = `${scorePage}?name=${this._name}&size=${
+        this._size
+      }&time=${localStorage.getItem("time")}`;
+      localStorage.clear();
+    }, 750);
+
+    fetch("http://localhost:8081/scores", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      750
-    );
-  };
+      body: JSON.stringify({
+        name: localStorage.getItem("name"),
+        time: localStorage.getItem("time"),
+        size: localStorage.getItem("size"),
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur lors de l'envoi du score");
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur lors de l'envoi du score:", error);
+      });
+  }
   _flipCard(card) {
     if (this._busy) {
       return;
@@ -134,21 +144,21 @@ export class GameComponent extends Component {
     if (card.flipped) {
       return;
     }
-    // flip the card
     card.flip();
-    // if flipped first card of the pair
-    if(this._flippedCard === null || this._flippedCard === undefined || this._flippedCard === NaN || this._flippedCard === "" || this._flippedCard === false) {
-      // keep this card flipped, and wait for the second card of the pair si égale à nulle ou vide.
+    if (
+      this._flippedCard === null ||
+      this._flippedCard === undefined ||
+      this._flippedCard === NaN ||
+      this._flippedCard === "" ||
+      this._flippedCard === false
+    ) {
       this._flippedCard = card;
       this._flippedCardIndex = this._cards.indexOf(card);
     } else {
-      // second card of the pair flipped...
-      // if cards are the same
       if (card.equals(this._flippedCard)) {
         this._flippedCard.matched = true;
         card.matched = true;
         this._matchedPairs += 1;
-        // reset flipped card for the next turn.
         this._flippedCard = null;
         this._flippedCardIndex = null;
         if (this._matchedPairs === this._size) {
@@ -156,20 +166,15 @@ export class GameComponent extends Component {
         }
       } else {
         this._busy = true;
-        // cards did not match
-        // wait a short amount of time before hiding both cards
         setTimeout(() => {
-          // hide the cards
           this._flippedCard.flip();
           card.flip();
           this._busy = false;
-          // reset flipped card for the next turn.
           this._flippedCard = null;
           this._flippedCardIndex = null;
           localStorage.setItem("cards", JSON.stringify(this._cards));
           localStorage.setItem("matchedPairs", this._matchedPairs);
-          if (this._flippedCardIndex !=null){
-            //si pas égale à nulle
+          if (this._flippedCardIndex != null) {
             localStorage.setItem("flippedCard", this._flippedCardIndex);
           } else {
             localStorage.removeItem("flippedCard");
@@ -179,11 +184,10 @@ export class GameComponent extends Component {
     }
     localStorage.setItem("cards", JSON.stringify(this._cards));
     localStorage.setItem("matchedPairs", this._matchedPairs);
-    if (this._flippedCardIndex !=null) {
+    if (this._flippedCardIndex != null) {
       localStorage.setItem("flippedCard", this._flippedCardIndex);
     } else {
       localStorage.removeItem("flippedCard");
     }
   }
 }
-
